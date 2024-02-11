@@ -28,5 +28,9 @@ namespace ProcessadorAutonomo.Entities
         public DateTime EndedAt { get; set; }
 
         public ICollection<SubProcess> SubProcesses { get; set; } = new List<SubProcess>();
+        public override string? ToString()
+        {
+            return $"Process {Id, -5} | Status: {Status, -10} | Subprocesses: {SubProcesses.Count}";
+        }
     }
 }
