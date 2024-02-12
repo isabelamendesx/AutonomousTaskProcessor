@@ -1,22 +1,11 @@
-﻿using ProcessadorAutonomo.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutonomousTaskProcessor.Entities;
 
-namespace ProcessadorAutonomo.Repositories
+namespace AutonomousTaskProcessor.Repositories;
+
+public interface IRepository<T>
 {
-    public interface IRepository<T>
-    {
-        IEnumerable<T> GetAll();
-        T? GetById(int id);
-        void Add();
-        void Update(T entity);
-
-        void UpdateProcessStatus(int processId, StatusProcess newStatus);
-
-        void ConcludeSubprocess(SubProcess subProcess);
-    }
+    IEnumerable<T> GetAll();
+    T? GetById(int id);
+    void Add();
+    void Update(T entity);
 }

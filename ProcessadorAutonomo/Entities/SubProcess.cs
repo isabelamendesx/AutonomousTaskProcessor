@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace AutonomousTaskProcessor.Entities;
 
-namespace ProcessadorAutonomo.Entities
+public class SubProcess
 {
-    public class SubProcess
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public TimeSpan Duration { get; set; }
+    public TimeSpan Duration { get; set; }
 
-        public bool isConcluded { get; set; } = false;
+    public bool isConcluded { get; set; } = false;
 
-        public int ProcessId { get; set; }
-        public Process Process { get; set; } = null!;
+    public int ProcessId { get; set; }
+    public Process Process { get; set; } = null!;
 
-    }
 }

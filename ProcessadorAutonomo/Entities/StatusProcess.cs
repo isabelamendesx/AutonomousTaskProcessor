@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace ProcessadorAutonomo.Entities
+namespace AutonomousTaskProcessor.Entities;
+
+public enum StatusProcess
 {
-    public enum StatusProcess
-    {
-        Created,
-        Scheduled,
-        InProgress,
-        Paused,
-        Canceled,
-        Completed
-    }
+    Created,
+    Scheduled,
+    InProgress,
+    Paused,
+    Canceled,
+    Completed
 }

@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutonomousTaskProcessor.Data;
+using AutonomousTaskProcessor.Entities;
+using AutonomousTaskProcessor.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ProcessadorAutonomo.Data;
-using ProcessadorAutonomo.Entities;
-using ProcessadorAutonomo.Repositories;
 
 namespace Repositories;
 
-public class SqliteRepository : IRepository<Process>
+public class SqliteRepository : IProcessRepository
 {
     private readonly ProcessContext _context;
     private readonly IConfiguration _config;

@@ -1,18 +1,9 @@
-﻿using ProcessadorAutonomo.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace AutonomousTaskProcessor.Services;
 
-namespace ProcessadorAutonomo.Services
+public interface IProcessExecutor
 {
-    public interface IProcessExecutor
-    {
-        Task ExecuteProcessAsync(Entities.Process process, CancellationToken cancellationToken);
-        Task ExecuteSubProcessAsync(SubProcess subprocess, CancellationToken cancellationToken);
-        Task ExecuteProcessInParallel();
-        Task CancelProcess(int processId);
-        Task Close();
-    }
+    Task Start();
+    Task CancelProcess(int processId);
+    Task Close();
 }

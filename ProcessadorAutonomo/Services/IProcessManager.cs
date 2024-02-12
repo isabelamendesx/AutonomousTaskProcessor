@@ -1,13 +1,12 @@
-﻿using ProcessadorAutonomo.Entities;
+﻿using AutonomousTaskProcessor.Entities;
 
-namespace ProcessadorAutonomo.Services
+namespace AutonomousTaskProcessor.Services;
+
+public interface IProcessManager
 {
-    public interface IProcessManager
-    {
-        Task Create();
-        Task<Process?> Check(int processId);
-        Task Cancel(int processId);
-        Task<IEnumerable<Process>> ListActiveProcesses();
-        Task<IEnumerable<Process>> ListInactiveProcesses();
-    }
+    Task Create();
+    Task<Process?> Check(int processId);
+    Task Cancel(int processId);
+    Task<IEnumerable<Process>> ListActiveProcesses();
+    Task<IEnumerable<Process>> ListInactiveProcesses();
 }
