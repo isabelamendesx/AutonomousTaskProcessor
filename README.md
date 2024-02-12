@@ -1,4 +1,7 @@
-# Autonomous Task Processor 🤖
+
+<p align="center">
+  <img src="/imgs/logo.png" alt="Tela inicial">
+</p># Autonomous Task Processor 🤖
 
  Um processador autônomo de tarefas desenvolvido em C#, elaborado como uma ferramenta para treinamento em programação assíncrona que pode ser empregada em diferentes projetos concretos.
 
