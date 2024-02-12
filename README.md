@@ -2,10 +2,18 @@
 
  Um processador autônomo de tarefas desenvolvido em C#, elaborado como uma ferramenta para treinamento em programação assíncrona que pode ser empregada em diferentes projetos concretos.
 
+<p align="center">
+  <img src="/imgs/initialView.png" alt="Tela inicial" width="600px">
+</p>
+
 ## Descrição
 
 Este projeto é um processador de tarefas que não necessita da intervenção do usuário, desenvolvido para ser uma ferramenta flexível que pode ser integrada em diversos contextos. Desenvolvi este projeto enquanto cursava o módulo Técnicas de Programação I no curso BackEnd Developer C# da Ada Tech, então seu principal
 objetivo é demonstrar o uso dos tópicos abordados: Programação assíncrona, Arquivos de Configuração, Collections, LINQ e Interfaces de Coleção.
+
+ <p align="center">
+  <img src="/imgs/completedView.png" alt="Tela Processos pausados" width="600px">
+</p>
 
 - `⚙️ Programação Assíncrona`
  Uso extensivo para garantir uma execução responsiva e eficiente das tarefas, permitindo operações I/O paralelas assíncronas, gerenciamento eficaz e espera não bloqueante.
