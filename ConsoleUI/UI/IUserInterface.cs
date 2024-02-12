@@ -11,4 +11,5 @@ public interface IUserInterface
     Task HandleMenuOption(char option);
     void ShowMenu();
     void PrintRunningTasks();
+    Task RestartOrResume();
 }

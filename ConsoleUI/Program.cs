@@ -22,6 +22,8 @@ public class Program
             var processManager = serviceprovider.GetService<IProcessManager>();
             var UI = serviceprovider.GetService<IUserInterface>()!;
 
+            await UI.RestartOrResume();
+
             var runningProcesses = processExecutor!.Start();
 
             while (!runningProcesses.IsCompleted)

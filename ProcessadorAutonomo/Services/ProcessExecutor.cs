@@ -57,8 +57,7 @@ public class ProcessExecutor : IProcessExecutor
         var validStatus = new[] { StatusProcess.Created, StatusProcess.Scheduled, StatusProcess.Paused };
 
         var generateProcessQueue = _repository.GetAll()
-            .Where(p => validStatus
-            .Contains(p.Status))
+            .Where(p => validStatus.Contains(p.Status))
             .ToList();
 
         generateProcessQueue.ForEach(process => _repository.UpdateProcessStatus(process.Id, StatusProcess.Scheduled));
@@ -66,6 +65,13 @@ public class ProcessExecutor : IProcessExecutor
         return generateProcessQueue;
     }
 
+    public Task Restart()
+    {
+        _repository.GetAll().ToList().ForEach(process => _repository.UpdateProcessStatus(process.Id, StatusProcess.Scheduled));
+        _repository.GetAllSubprocesses().ToList().ForEach(subprocess => _repository.ConcludeSubprocess(subprocess, false));
+
+        return Task.CompletedTask;
+    }
 
     public async Task Start()
     {
@@ -127,6 +133,6 @@ public class ProcessExecutor : IProcessExecutor
         }
 
         _repository.UpdateProcessStatus(process.Id, StatusProcess.Completed);
-        Console.WriteLine($"process {process.Id} completed\n");
+        Console.WriteLine($"\nPROCESS {process.Id} COMPLETED!");
     }
 }

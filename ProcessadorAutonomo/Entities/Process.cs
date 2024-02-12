@@ -6,7 +6,7 @@ public interface IProcess
     StatusProcess Status { get; }
     DateTime StartedAt { get; }
     DateTime EndedAt { get; }
-    ICollection<SubProcess>? SubProcesses { get; }
+    IList<SubProcess>? SubProcesses { get; }
 }
 
 public class Process : IProcess
@@ -21,7 +21,7 @@ public class Process : IProcess
 
     public DateTime EndedAt { get; set; }
 
-    public ICollection<SubProcess> SubProcesses { get; set; } = new List<SubProcess>();
+    public IList<SubProcess> SubProcesses { get; set; } = new List<SubProcess>();
     public override string? ToString()
     {
         return $"Process {Id,-5} | Status: {Status,-10} | Subprocesses: {SubProcesses.Count}";

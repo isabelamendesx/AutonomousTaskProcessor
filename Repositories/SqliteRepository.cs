@@ -38,6 +38,14 @@ public class SqliteRepository : IProcessRepository
         }
     }
 
+    public IEnumerable<SubProcess> GetAllSubprocesses()
+    {
+        lock (lockObject)
+        {
+            return _context.SubProcesses.ToList();
+        }
+    }
+
     public Process? GetById(int id)
     {
         lock (lockObject)
@@ -70,11 +78,11 @@ public class SqliteRepository : IProcessRepository
         }
     }
 
-    public void ConcludeSubprocess(SubProcess subProcess)
+    public void ConcludeSubprocess(SubProcess subProcess, bool concluded = true)
     {
         lock (lockObject)
         {
-            subProcess.isConcluded = true;
+            subProcess.isConcluded = concluded;
             _context.SaveChanges();
         }
     }

@@ -102,7 +102,7 @@ public class UserInterface : IUserInterface
 
             case '5':
                 PrintProcesses();
-                int processId = Utilities.ReadInteger("Enter process ID to cancel", 1, GetActiveProcesses().Count());
+                int processId = Utilities.ReadInteger("Enter process ID to cancel", 1);
                 var process = _processManager.Check(processId).Result ?? null;
 
                 if(process != null)
@@ -160,6 +160,20 @@ public class UserInterface : IUserInterface
         }
 
         Console.WriteLine("╚════════════════════════════════════════════════╝");
+    }
+
+    public async Task RestartOrResume()
+    {
+        Console.WriteLine("Press 'R' to restart processing from 0 or any other key to resume the last saved processing");
+
+        if (Console.ReadLine()!.ToUpper().Equals("R"))
+        {
+            Console.WriteLine("Restarting application...");
+            await Task.Delay(1000);
+            await _processExecutor!.Restart();
+        }
+
+        Console.WriteLine("Starting from the last saved processing...");
     }
 
     private void PrintProgressBar(int completed, int total)

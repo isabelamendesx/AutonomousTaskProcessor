@@ -10,6 +10,7 @@ namespace AutonomousTaskProcessor.Repositories
     public interface IProcessRepository : IRepository<Process>
     {
         void UpdateProcessStatus(int processId, StatusProcess newStatus);
-        void ConcludeSubprocess(SubProcess subProcess);
+        void ConcludeSubprocess(SubProcess subProcess, bool concluded = true);
+        IEnumerable<SubProcess> GetAllSubprocesses();
     }
 }
