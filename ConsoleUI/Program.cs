@@ -2,6 +2,7 @@
 using AutonomousTaskProcessor.Entities;
 using AutonomousTaskProcessor.Repositories;
 using AutonomousTaskProcessor.Services;
+using ConsoleUI.Resources;
 using ConsoleUI.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -64,11 +65,9 @@ public class Program
             .AddJsonFile("appsettings.json")
             .Build();
 
-
         services.AddDbContext<ProcessContext>();
-
-
         services.AddSingleton(configuration);
+
         services.AddSingleton<IUserInterface, UserInterface>();
         services.AddScoped<IProcessRepository, SqliteRepository>();
         services.AddScoped<IProcessExecutor, ProcessExecutor>();

@@ -89,16 +89,17 @@ public class SqliteRepository : IProcessRepository
 
     private List<SubProcess> GenerateSubProcesses()
     {
+
         var random = new Random();
         var subProcesses = new List<SubProcess>();
-        var subProcessQuantity = random.Next(int.Parse(_config.GetSection("MinSubProcessesPerProcess").Value ?? "1"), int.Parse(_config.GetSection("MaxSubProcessesPerProcess").Value ?? "2"));
+        var subProcessQuantity = random.Next(int.Parse(_config.GetSection("ProcessesConfig")["MinSubProcessesPerProcess"] ?? "2"), int.Parse(_config.GetSection("ProcessesConfig")["MaxSubProcessesPerProcesses"] ?? "4"));
 
         for (int i = 0; i < subProcessQuantity; i++)
         {
             subProcesses.Add(
                  new SubProcess
                  {
-                     Duration = TimeSpan.FromSeconds(random.Next(int.Parse(_config.GetSection("MinSubProcessesDuration").Value ?? "1"), int.Parse(_config.GetSection("MaxSubProcessesDuration").Value ?? "3")))
+                     Duration = TimeSpan.FromSeconds(random.Next(int.Parse(_config.GetSection("ProcessesConfig")["MinSubProcessesDuration"] ?? "2"), int.Parse(_config.GetSection("ProcessesConfig")["MaxSubProcessesDuration"] ?? "2")))
                  }
             );
         }

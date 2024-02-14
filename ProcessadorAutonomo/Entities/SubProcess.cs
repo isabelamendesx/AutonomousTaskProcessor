@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace AutonomousTaskProcessor.Entities;
 
 public class SubProcess
@@ -9,7 +11,10 @@ public class SubProcess
 
     public bool isConcluded { get; set; } = false;
 
+    [JsonIgnore]
     public int ProcessId { get; set; }
+
+    [JsonIgnore]
     public Process Process { get; set; } = null!;
 
 }

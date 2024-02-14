@@ -64,7 +64,6 @@ public class UserInterface : IUserInterface
                 Console.WriteLine("Creating a new process...");
                 await Task.Delay(1000);
                 await _processManager.Create();
-                //ShowActiveProcesses();
                 PrintProcesses();
                 await Task.Delay(5000);
                 break;

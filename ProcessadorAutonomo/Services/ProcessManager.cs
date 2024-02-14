@@ -7,12 +7,10 @@ namespace AutonomousTaskProcessor.Services;
 public class ProcessManager : IProcessManager
 {
     private readonly IProcessRepository _repository;
-    private readonly IConfiguration _configuration;
 
-    public ProcessManager(IProcessRepository repository, IConfiguration configuration)
+    public ProcessManager(IProcessRepository repository)
     {
         _repository = repository;
-        _configuration = configuration;
     }
 
     public Task Create()

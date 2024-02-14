@@ -9,8 +9,8 @@ public class ProcessExecutor : IProcessExecutor
     private IProcessRepository _repository;
     public List<Task> RunningTasks;
     private Dictionary<int, CancellationTokenSource> _cancellationTokenSources;
-    private SemaphoreSlim _semaphore;
-    private readonly IConfiguration _configuration;
+    private SemaphoreSlim? _semaphore;
+    private readonly IConfiguration _config;
     private bool _running = true;
 
     public ProcessExecutor(IProcessRepository repository, IConfiguration configuration)
@@ -18,7 +18,7 @@ public class ProcessExecutor : IProcessExecutor
         _repository = repository;
         RunningTasks = new List<Task>();
         _cancellationTokenSources = new Dictionary<int, CancellationTokenSource>();
-        _configuration = configuration;
+        _config = configuration;
     }
 
     public Task CancelProcess(int processId)
@@ -41,10 +41,10 @@ public class ProcessExecutor : IProcessExecutor
     {
         _running = false;
 
-        foreach (var cancellationTokenSource in _cancellationTokenSources)
-        {
-            var processId = cancellationTokenSource.Key;
-            cancellationTokenSource.Value.Cancel();
+        foreach (var kvp in _cancellationTokenSources)
+        { 
+            var processId = kvp.Key;
+            kvp.Value.Cancel();
             Console.WriteLine($"Process {processId} paused requested.");
             _repository.UpdateProcessStatus(processId, StatusProcess.Paused);
         }
@@ -74,9 +74,10 @@ public class ProcessExecutor : IProcessExecutor
     }
 
     public async Task Start()
-    {
-        int maxParallelProcesses = int.Parse(_configuration.GetSection("MaxParallelProcesses").Value ?? "2");
+    { 
+        int maxParallelProcesses = int.Parse(_config.GetSection("ProcessesConfig")["MaxParallelProcesses"] ?? "5");
         _semaphore = new SemaphoreSlim(maxParallelProcesses);
+        _running = true;
 
         foreach (var process in generateProcessQueue())
         {
@@ -116,6 +117,7 @@ public class ProcessExecutor : IProcessExecutor
 
     private async Task ExecuteProcessAsync(Process process, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"Process {process.Id} STARTED");
         _repository.UpdateProcessStatus(process.Id, StatusProcess.InProgress);
 
         var pendingSubProcesss = process.SubProcesses.ToList();
@@ -131,8 +133,7 @@ public class ProcessExecutor : IProcessExecutor
                 return;
             }
         }
-
         _repository.UpdateProcessStatus(process.Id, StatusProcess.Completed);
-        Console.WriteLine($"\nPROCESS {process.Id} COMPLETED!");
+        Console.WriteLine($"\nProcess {process.Id} COMPLETED");
     }
 }
